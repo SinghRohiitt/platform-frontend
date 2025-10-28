@@ -1,9 +1,10 @@
 // components/Sidebar.jsx
 import { NavLink } from "react-router-dom";
-import { Home, ClipboardList, Users, Settings} from "lucide-react";
+import { Home, ClipboardList, Users, Settings, LucideProjector} from "lucide-react";
 
 const links = [
   { name: "Dashboard", icon: <Home className="w-5 h-5" />, path: "/" },
+   { name: "Projects", icon: <LucideProjector className="w-5 h-5" />, path: "/projects" },
   { name: "Tasks", icon: <ClipboardList className="w-5 h-5" />, path: "/tasks" },
   { name: "Team", icon: <Users className="w-5 h-5" />, path: "/team" },
   { name: "Settings", icon: <Settings className="w-5 h-5" />, path: "/settings" },

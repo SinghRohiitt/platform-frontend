@@ -1,12 +1,15 @@
 // App.jsx
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
 import Dashboard from "./pages/Dashboard";
-import Tasks from "./pages/Tasks";
 import Team from "./pages/Team";
 import SettingsPage from "./pages/Settings";
 import Sidebar from "./components/Sidebar";
 import Header from "./components/Header";
+import Project from "./pages/Project";
+import Tasks from "./pages/Tasks";
+import SignUp from "./pages/SignUp";
+import SignIn from "./pages/SignIn";
+
 function App() {
   return (
     <Router>
@@ -25,7 +28,10 @@ function App() {
               <Route path="/" element={<Dashboard />} />
               <Route path="/tasks" element={<Tasks />} />
               <Route path="/team" element={<Team />} />
-              <Route path="/settings" element={<SettingsPage />} />
+              <Route path="/projects" element={<Project />} />
+              <Route path="/dashboard" element={<SettingsPage />} />
+               <Route path="/signup" element={<SignUp />} />
+               <Route path="/signin" element={<SignIn />} />
             </Routes>
           </main>
         </div>

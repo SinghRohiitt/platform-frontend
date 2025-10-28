@@ -1,6 +1,6 @@
 
 
-export default function Header() {
+export const Header=()=> {
   return (
     <header className="flex justify-end  items-center p-4 md:p-6 bg-white shadow sticky top-0 z-10">
       {/* Navigation Links on the LEFT */}
