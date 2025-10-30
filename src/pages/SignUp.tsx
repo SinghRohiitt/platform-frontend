@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import { signup } from "../api/auth";
+import { useDispatch } from "react-redux";
+import type { AppDispatch } from "../redux/store";
+import { signupUser } from "../redux/authSlice";
 
 type FormData = {
   name: string;
@@ -10,6 +12,7 @@ type FormData = {
 };
 
 export default function SignUp() {
+  const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
   const [formData, setFormData] = useState<FormData>({
     name: "",
@@ -28,29 +31,27 @@ export default function SignUp() {
     setLoading(true);
 
     try {
-      const data = await signup(formData);
-      console.log("Signup successful:", data);
-      // ✅ show success alertco
+      // ✅ Proper thunk handling with unwrap
+      await dispatch(signupUser(formData)).unwrap();
+
       await Swal.fire({
         title: "Account Created 🎉",
         text: "You have successfully signed up!",
         icon: "success",
         confirmButtonText: "Continue",
-        confirmButtonColor: "#2563eb", // Tailwind blue-600
+        confirmButtonColor: "#2563eb",
       });
 
-      // Redirect after closing the alert
       navigate("/signin");
     } catch (err: any) {
       const errorMessage =
         err?.response?.data?.message || err.message || "Signup failed";
 
-      // ❌ show error alert
       Swal.fire({
         title: "Signup Failed",
         text: errorMessage,
         icon: "error",
-        confirmButtonColor: "#ef4444", // Tailwind red-500
+        confirmButtonColor: "#ef4444",
       });
     } finally {
       setLoading(false);

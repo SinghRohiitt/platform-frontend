@@ -10,3 +10,7 @@ export const signin = async (data: { email: string; password: string })=> {
 const res =  await api.post("/auth/signin", data)
 return res.data
 }
+export const getCurrentUser = async () => {
+  const res = await api.get("/auth/user");
+  return res.data;
+};

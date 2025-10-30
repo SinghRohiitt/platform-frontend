@@ -1,7 +1,10 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import { signin } from "../api/auth";
+// import { signin } from "../api/auth";
+import { useDispatch } from "react-redux";
+import { signinUser } from "../redux/authSlice";
+import type { AppDispatch } from "../redux/store";
 
 type FormData = {
   email: string;
@@ -9,6 +12,7 @@ type FormData = {
 };
 
 export default function SignIn() {
+   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
   const [formData, setFormData] = useState<FormData>({
     email: "",
@@ -26,29 +30,28 @@ export default function SignIn() {
     setLoading(true);
 
     try {
-      const data = await signin(formData);
-      console.log("Login successful:", data);
+   
+      const resultAction = await dispatch(signinUser(formData));
 
       // ✅ Show success alert
-      await Swal.fire({
-        title: "Login Successful 🎉",
-        text: "Welcome back!",
-        icon: "success",
-        confirmButtonText: "Go to Dashboard",
-        confirmButtonColor: "#2563eb",
-      });
+       if (signinUser.fulfilled.match(resultAction)) {
+        await Swal.fire({
+          title: "Login Successful 🎉",
+          text: "Welcome back!",
+          icon: "success",
+          confirmButtonText: "Go to Dashboard",
+          confirmButtonColor: "#2563eb",
+        });
 
-      // You can store token or user info in Redux/localStorage here
-      // localStorage.setItem("token", data.token);
-      // localStorage.setItem("user", JSON.stringify(data.user));
-
-      navigate("/dashboard"); // redirect after successful login
+        navigate("/dashboard");
+      } else {
+        throw new Error("Login failed");
+      }
     } catch (err: any) {
       const errorMessage =
         err?.response?.data?.message || err.message || "Login failed";
 
-      // ❌ Show error alert
-      Swal.fire({
+      await Swal.fire({
         title: "Login Failed",
         text: errorMessage,
         icon: "error",
