@@ -21,37 +21,51 @@ const initialState: AuthState = {
   error: null,
 };
 
-// ✅ Thunks
+// ✅ Signup Thunk
 export const signupUser = createAsyncThunk(
   "auth/signupUser",
-  async (formData: { name: string; email: string; password: string }, { rejectWithValue }) => {
+  async (
+    formData: { name: string; email: string; password: string },
+    { rejectWithValue }
+  ) => {
     try {
       const res = await signup(formData);
-      return res; // no token stored (cookie-based)
+      return res.data; // assume backend returns { message, user? }
     } catch (err: any) {
       return rejectWithValue(err.response?.data?.message || "Signup failed");
     }
   }
 );
 
+// ✅ Signin Thunk (fetch user after login)
 export const signinUser = createAsyncThunk(
   "auth/signinUser",
-  async (formData: { email: string; password: string }, { rejectWithValue }) => {
+  async (
+    formData: { email: string; password: string },
+    { dispatch, rejectWithValue }
+  ) => {
     try {
-      const res = await signin(formData);
-      return res; // cookie automatically set
+      // 1️⃣ Login → sets cookie
+      await signin(formData);
+
+      // 2️⃣ Fetch current user (cookie-based auth)
+      const user = await dispatch(fetchCurrentUser()).unwrap();
+
+      // 3️⃣ Return user → stored in state
+      return user;
     } catch (err: any) {
       return rejectWithValue(err.response?.data?.message || "Signin failed");
     }
   }
 );
 
+// ✅ Fetch Current User
 export const fetchCurrentUser = createAsyncThunk(
   "auth/fetchCurrentUser",
   async (_, { rejectWithValue }) => {
     try {
       const res = await getCurrentUser();
-      return res;
+      return res.data; // ensure you return only the user object
     } catch (err: any) {
       return rejectWithValue(err.response?.data?.message || "Failed to fetch user");
     }
@@ -68,20 +82,21 @@ export const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      // Signin
+      // 🔹 Signin
       .addCase(signinUser.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
       .addCase(signinUser.fulfilled, (state, action) => {
         state.loading = false;
+        state.user = action.payload;
       })
-      .addCase(signinUser.rejected, (state, action) => {    
+      .addCase(signinUser.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload as string;
       })
 
-      // Signup
+      // 🔹 Signup
       .addCase(signupUser.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -94,7 +109,7 @@ export const authSlice = createSlice({
         state.error = action.payload as string;
       })
 
-      // Fetch current user
+      // 🔹 Fetch Current User
       .addCase(fetchCurrentUser.pending, (state) => {
         state.loading = true;
       })

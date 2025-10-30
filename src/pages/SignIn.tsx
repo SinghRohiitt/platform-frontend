@@ -43,7 +43,7 @@ export default function SignIn() {
           confirmButtonColor: "#2563eb",
         });
 
-        navigate("/dashboard");
+        navigate("/");
       } else {
         throw new Error("Login failed");
       }
