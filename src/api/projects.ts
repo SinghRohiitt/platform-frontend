@@ -10,12 +10,13 @@ export const createProject = async (data: { title: string; description?: string 
   return res.data;
 };
 
-export const updateProject = async (id: string, data: { title?: string; description?: string }) => {
-  const res = await api.put(`/projects/${id}`, data);
+export const updateProjectById = async (id: string, data: any) => {
+  const res = await api.put(`/projects/${id}`, data, { withCredentials: true });
   return res.data;
 };
 
-export const deleteProject = async (id: string) => {
-  const res = await api.delete(`/projects/${id}`);
+// ✅ Delete project
+export const deleteProjectById = async (id: string) => {
+  const res = await api.delete(`/projects/${id}`, { withCredentials: true });
   return res.data;
 };
