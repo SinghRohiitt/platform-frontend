@@ -50,9 +50,10 @@ export const signinUser = createAsyncThunk(
 
       // 2️⃣ Fetch current user (cookie-based auth)
       const user = await dispatch(fetchCurrentUser()).unwrap();
-
+console.log("Fetched User after Signin:", user);
       // 3️⃣ Return user → stored in state
       return user;
+   
     } catch (err: any) {
       return rejectWithValue(err.response?.data?.message || "Signin failed");
     }
@@ -65,7 +66,8 @@ export const fetchCurrentUser = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const res = await getCurrentUser();
-      return res.data; // ensure you return only the user object
+      console.log("Current User Data:", res);
+      return res; // ensure you return only the user object
     } catch (err: any) {
       return rejectWithValue(err.response?.data?.message || "Failed to fetch user");
     }
