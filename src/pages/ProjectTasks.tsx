@@ -25,13 +25,12 @@ export default function ProjectTasks() {
 
   const handleCreateTask = async (e: any) => {
     e.preventDefault();
-
     const res = await createTask({
       title,
       description,
       priority,
       projectId,
-      assignedTo,
+      assignedTo: assignedTo || null,
     });
 
     setTasks((prev) => [res.task, ...prev]);
@@ -127,7 +126,6 @@ export default function ProjectTasks() {
             </p>
 
             <p className="text-sm">Status: {task.status}</p>
-
             <button
               onClick={() => handleDelete(task.id)}
               className="mt-3 px-3 py-1 bg-red-500 text-white rounded text-sm"

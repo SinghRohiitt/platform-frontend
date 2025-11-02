@@ -7,6 +7,7 @@ import {
 } from "../api/projects";
 import Modal from "../components/Modal";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 interface Project {
   id: string;
@@ -24,7 +25,7 @@ export default function Project() {
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-
+const navigate = useNavigate();
   // Create Modal
   const [open, setOpen] = useState(false);
 
@@ -199,7 +200,12 @@ export default function Project() {
                 >
                   Edit
                 </button>
-
+                <button
+                  className="px-3 py-1 bg-red-500 text-white text-sm rounded hover:bg-red-600"
+                  onClick={() => navigate(`/project/${project.id}/tasks`)}
+                >
+                  add task
+                </button>
                 <button
                   className="px-3 py-1 bg-red-500 text-white text-sm rounded hover:bg-red-600"
                   onClick={() => handleDelete(project.id)}

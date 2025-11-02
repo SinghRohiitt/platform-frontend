@@ -14,3 +14,8 @@ export const getCurrentUser = async () => {
   const res = await api.get("/auth/user");
   return res.data;
 };
+
+export const getAllUsers = async () => {
+  const res = await api.get("/auth/allusers");
+  return res.data;
+};
