@@ -25,3 +25,8 @@ export const assignUsers = async (projectId: string, userIds: string[]) => {
   const res = await api.post(`/projects/${projectId}/assign`, { userIds });
   return res.data;
 };
+
+export const getProjectMembers = async (projectId: string) => {
+  const res = await api.get(`/projects/${projectId}/members`);
+  return res.data;
+};
