@@ -4,10 +4,12 @@ import {
   fetchProjects,
   updateProjectById,
   deleteProjectById,
+  assignUsers,
 } from "../api/projects";
 import Modal from "../components/Modal";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import { getAllUsers } from "../api/auth";
 
 interface Project {
   id: string;
@@ -25,9 +27,15 @@ export default function Project() {
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-const navigate = useNavigate();
+  const navigate = useNavigate();
   // Create Modal
   const [open, setOpen] = useState(false);
+  const [assignModalOpen, setAssignModalOpen] = useState(false);
+  const [selectedProjectId, setSelectedProjectId] = useState<string | null>(
+    null
+  );
+  const [users, setUsers] = useState<any[]>([]);
+  const [selectedUsers, setSelectedUsers] = useState<string[]>([]);
 
   // Create form state
   const [title, setTitle] = useState("");
@@ -57,7 +65,12 @@ const navigate = useNavigate();
       setLoading(false);
     }
   };
-
+  const openAssignModal = async (project: Project) => {
+    setSelectedProjectId(project.id);
+    const res = await getAllUsers();
+    setUsers(res.users); // users [{id, name, email}]
+    setAssignModalOpen(true);
+  };
   // ✅ Create New Project
   const handleCreateProject = async (e: any) => {
     e.preventDefault();
@@ -212,6 +225,12 @@ const navigate = useNavigate();
                 >
                   Delete
                 </button>
+                <button
+                  className="px-3 py-1 bg-purple-600 text-white rounded"
+                  onClick={() => openAssignModal(project)}
+                >
+                  Assign Members
+                </button>
               </div>
             </li>
           ))}
@@ -254,6 +273,60 @@ const navigate = useNavigate();
                 onClick={submitUpdate}
               >
                 Update
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+      {assignModalOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-40 flex justify-center items-center">
+          <div className="bg-white p-6 rounded-lg w-96 shadow-lg">
+            <h2 className="text-xl font-semibold mb-4">Assign Members</h2>
+
+            <div className="space-y-2 max-h-60 overflow-y-auto">
+              {users.map((user) => (
+                <label key={user.id} className="flex items-center space-x-2">
+                  <input
+                    type="checkbox"
+                    checked={selectedUsers.includes(user.id)}
+                    onChange={() => {
+                      setSelectedUsers((prev) =>
+                        prev.includes(user.id)
+                          ? prev.filter((u) => u !== user.id)
+                          : [...prev, user.id]
+                      );
+                    }}
+                  />
+                  <span>
+                    {user.name} ({user.email})
+                  </span>
+                </label>
+              ))}
+            </div>
+
+            <div className="flex justify-end mt-4 space-x-2">
+              <button
+                className="px-4 py-2 bg-gray-300 rounded"
+                onClick={() => setAssignModalOpen(false)}
+              >
+                Cancel
+              </button>
+              <button
+                className="px-4 py-2 bg-purple-600 text-white rounded"
+                onClick={async () => {
+                  await assignUsers(
+                    selectedProjectId!,
+                    selectedUsers
+                  );
+                  Swal.fire(
+                    "Updated!",
+                    "Members assigned successfully",
+                    "success"
+                  );
+                  setAssignModalOpen(false);
+                }}
+              >
+                Save
               </button>
             </div>
           </div>

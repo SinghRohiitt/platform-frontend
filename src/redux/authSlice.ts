@@ -69,7 +69,22 @@ export const fetchCurrentUser = createAsyncThunk(
       console.log("Current User Data:", res);
       return res; // ensure you return only the user object
     } catch (err: any) {
-      return rejectWithValue(err.response?.data?.message || "Failed to fetch user");
+      return rejectWithValue(
+        err.response?.data?.message || "Failed to fetch user"
+      );
+    }
+  }
+);
+
+// ✅ Logout Thunk
+export const logoutUser = createAsyncThunk(
+  "auth/logout",
+  async (_, { dispatch, rejectWithValue }) => {
+    try {
+      await logout(); // backend clears cookie
+      dispatch(logout()); // redux clears user
+    } catch (err) {
+      return rejectWithValue("Logout failed");
     }
   }
 );
@@ -122,6 +137,19 @@ export const authSlice = createSlice({
       .addCase(fetchCurrentUser.rejected, (state) => {
         state.loading = false;
         state.user = null;
+      })
+
+      // 🔹 Logout
+      .addCase(logoutUser.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(logoutUser.fulfilled, (state) => {
+        state.loading = false;
+        state.user = null;
+      })
+      .addCase(logoutUser.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
       });
   },
 });

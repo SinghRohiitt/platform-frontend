@@ -20,3 +20,8 @@ export const deleteProjectById = async (id: string) => {
   const res = await api.delete(`/projects/${id}`, { withCredentials: true });
   return res.data;
 };
+
+export const assignUsers = async (projectId: string, userIds: string[]) => {
+  const res = await api.post(`/projects/${projectId}/assign`, { userIds });
+  return res.data;
+};

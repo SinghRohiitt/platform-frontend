@@ -6,6 +6,14 @@ interface User {
   name: string;
   email: string;
   role?: string;
+  ProjectMember: [
+    {
+      project: {
+        id: string;
+        title: string;
+      };
+    }
+  ];
 }
 
 export default function Team() {
@@ -20,9 +28,9 @@ export default function Team() {
       const res = await getAllUsers();
 
       // ✅ Adjust based on your API structure
-      setUsers(res || []);
+      setUsers(res.users || []);
 
-      console.log("Users:", res);
+      console.log("Users:", res.users);
     } catch (err: any) {
       setError(err.response?.data?.message || "Failed to fetch users");
     } finally {
@@ -46,7 +54,10 @@ export default function Team() {
           <li key={user.id} className="border p-2 rounded mb-2">
             <p className="font-semibold">{user.name}</p>
             <p className="text-sm">{user.email}</p>
-            {user.role && <p className="text-xs text-gray-500">Role: {user.role}</p>}
+            {user.role && (
+              <p className="text-xs text-gray-500">Role: {user.role}</p>
+            )}
+            <p className="text-sm">{user.ProjectMember[0]?.project.title}</p>
           </li>
         ))}
       </ul>
