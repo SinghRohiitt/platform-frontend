@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import { createTask, getTasksByProject, assignTaskToUser } from "../api/tasks";
-import { getProjectMembers } from "../api/projects";
+
 
 export default function ProjectTasks() {
   const { projectId } = useParams();
@@ -19,7 +19,7 @@ export default function ProjectTasks() {
 
   useEffect(() => {
     loadTasks();
-    loadMembers();
+    // loadMembers();
   }, []);
 
   const loadTasks = async () => {
@@ -27,10 +27,10 @@ export default function ProjectTasks() {
     setTasks(res.tasks);
   };
 
-  const loadMembers = async () => {
-    const res = await getProjectMembers(projectId!);
-    setMembers(res.members);
-  };
+  // const loadMembers = async () => {
+  //   const res = await getProjectMembers(projectId!);
+  //   setMembers(res.members);
+  // };
 
   // Create Task
   const handleCreateTask = async (e: any) => {

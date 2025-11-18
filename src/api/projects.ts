@@ -26,7 +26,12 @@ export const assignUsers = async (projectId: string, userIds: string[]) => {
   return res.data;
 };
 
-export const getProjectMembers = async (projectId: string) => {
-  const res = await api.get(`/projects/${projectId}/members`);
+// export const getProjectMembers = async (projectId: string) => {
+//   const res = await api.get(`/projects/${projectId}/members`);
+//   return res.data;
+// };
+
+export const getMyProject = async () => {
+  const res = await api.get(`/projects/my-projects`);
   return res.data;
 };

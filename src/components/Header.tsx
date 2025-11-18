@@ -30,7 +30,7 @@ export const Header = () => {
         {/* Profile */}
         <div className="flex items-center gap-3 bg-gray-50 hover:bg-gray-100 transition px-3 py-1.5 rounded-full cursor-pointer shadow-sm border border-gray-200">
           <div className="text-right">
-            <p classname="text-sm font-medium text-gray-900 leading-none">
+            <p className="text-sm font-medium text-gray-900 leading-none">
               {user?.name}
             </p>
             <p className="text-xs text-gray-500 truncate max-w-[120px]">

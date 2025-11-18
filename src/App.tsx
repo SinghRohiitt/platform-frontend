@@ -13,10 +13,13 @@ import SignIn from "./pages/SignIn";
 import PublicLayout from "./layouts/PublicLayout";
 import ProjectTasks from "./pages/ProjectTasks";
 import AdminLayout from "./layouts/AdminLayout";
+import UserProject from "./pages/UserProject";
 
 function App() {
   return (
     <Router>
+
+      
       <Routes>
         {/* Protected Routes (with layout) */}
         <Route element={<PrivateRoute />}>
@@ -24,7 +27,7 @@ function App() {
             <Route path="/" element={<Dashboard />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/project/:projectId/tasks" element={<ProjectTasks />} />
-
+<Route path="/user/project" element={<UserProject />} />
             <Route path="/settings" element={<SettingsPage />} />
           </Route>
         </Route>
