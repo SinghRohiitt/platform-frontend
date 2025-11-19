@@ -1,15 +1,17 @@
 import { useEffect, useState } from "react";
 import { getMyProject } from "../api/projects";
-
+import axios from "axios";
 
 export default function UserProject() {
-
   const [members, setMembers] = useState([]);
 
   const fetchUserProject = async () => {
     try {
-       
-      const res = await getMyProject();
+      const res = await axios
+        .get("http://localhost:5000/api/projects/myproject", {
+          withCredentials: true,
+        })
+        .then((response) => response.data);
       console.log("Members:", res);
       setMembers(res);
     } catch (error) {
