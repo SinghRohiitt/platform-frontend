@@ -27,3 +27,12 @@ export const logout = async () => {
   const res = await api.post("/auth/logout");
   return res.data;
 };
+
+export const updateProfile = async (data: {
+  name?: string;
+  email?: string;
+  image?: string;
+}) => {
+  const res = await api.put("/auth/update-profile", data);
+  return res.data;
+};

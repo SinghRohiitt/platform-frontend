@@ -14,25 +14,29 @@ import PublicLayout from "./layouts/PublicLayout";
 import ProjectTasks from "./pages/ProjectTasks";
 import AdminLayout from "./layouts/AdminLayout";
 import UserProject from "./pages/UserProject";
+import EditProfile from "./pages/EditProfile";
 
 function App() {
   return (
     <Router>
-
-      
       <Routes>
         {/* Protected Routes (with layout) */}
         <Route element={<PrivateRoute />}>
           <Route element={<DashboardLayout />}>
             <Route path="/" element={<Dashboard />} />
             <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/project/:projectId/tasks" element={<ProjectTasks />} />
-<Route path="/user/project" element={<UserProject />} />
+            <Route
+              path="/project/:projectId/tasks"
+              element={<ProjectTasks />}
+            />
+            {/* <Route path="/edit-profile" element={<EditProfile />} /> */}
+            <Route path="/user/project" element={<UserProject />} />
             <Route path="/settings" element={<SettingsPage />} />
           </Route>
         </Route>
         <Route element={<AdminLayout />}>
           <Route element={<DashboardLayout />}>
+            <Route path="/edit-profile" element={<EditProfile />} />
             <Route path="/projects" element={<Project />} />
             <Route path="/team" element={<Team />} />
           </Route>
