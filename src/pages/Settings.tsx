@@ -1,14 +1,14 @@
-import { useDispatch } from "react-redux";
+// import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { logoutUser } from "../redux/authSlice";
+// import { logoutUser } from "../redux/authSlice";
 import Swal from "sweetalert2";
 
 export default function Settings() {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleLogout = async () => {
-    await dispatch(logoutUser());
+    // await dispatch(logoutUser());
 
     Swal.fire({
       title: "Logged Out ✅",

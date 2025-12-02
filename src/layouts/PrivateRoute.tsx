@@ -6,7 +6,7 @@ import type { RootState } from "../redux/store";
 
 const PrivateRoute = () => {
   const { user } = useSelector((state: RootState) => state.auth);
-  console.log("PrivateRoute - user:", user?.role);  
+  // console.log("PrivateRoute - user:", user?.role);  
 
   // if no user → redirect to signin
   if (!user) {

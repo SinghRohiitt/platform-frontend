@@ -25,11 +25,12 @@ export default function ProjectTasks() {
   const loadTasks = async () => {
     const res = await getTasksByProject(projectId!);
     setTasks(res.tasks);
+    setMembers(res.members);
   };
 
   // const loadMembers = async () => {
   //   const res = await getProjectMembers(projectId!);
-  //   setMembers(res.members);
+  //   
   // };
 
   // Create Task

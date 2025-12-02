@@ -33,6 +33,6 @@ export const assignUsers = async (projectId: string, userIds: string[]) => {
 
 export const getMyProject = async () => {
   const res = await api.get(`/projects/myprojects` ,{ withCredentials: true });
-  console.log("API - getMyProject response:", res);
+  // console.log("API - getMyProject response:", res);
   return res.data;
 };

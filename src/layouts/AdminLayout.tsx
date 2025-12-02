@@ -6,7 +6,7 @@ import type { RootState } from "../redux/store";
 const AdminLayout = () => {
   const { user } = useSelector((state: RootState) => state.auth);
 
-  console.log("AdminLayout - user:", user);
+  // console.log("AdminLayout - user:", user);
 
   // 🔒 If not logged in → go to signin
   if (!user) {

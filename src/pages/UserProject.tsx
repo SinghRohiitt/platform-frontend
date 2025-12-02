@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { getMyProject } from "../api/projects";
+// import { getMyProject } from "../api/projects";
 import axios from "axios";
 
 export default function UserProject() {
-  const [members, setMembers] = useState([]);
+  const [,setMembers] = useState([]);
 
   const fetchUserProject = async () => {
     try {
@@ -12,7 +12,7 @@ export default function UserProject() {
           withCredentials: true,
         })
         .then((response) => response.data);
-      console.log("Members:", res);
+      // console.log("Members:", res);
       setMembers(res);
     } catch (error) {
       console.error("Error fetching members", error);

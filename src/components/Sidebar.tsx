@@ -15,7 +15,7 @@ const links = [
 export default function Sidebar() {
    const { user } = useSelector((state: RootState) => state.auth);
    const userRole = user?.role || "guest";      
-   console.log("Sidebar - userRole:", userRole);
+  //  console.log("Sidebar - userRole:", userRole);
 
   return (
     <aside className="w-64 bg-white border-r border-gray-200 shadow-sm flex flex-col">

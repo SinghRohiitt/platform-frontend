@@ -2,7 +2,7 @@ import api from "./axios";
 
 // ✅ Create Task for a specific project
 export const createTask = async (projectId: string, data: any) => {
-  console.log("Creating task for project:", projectId);
+  // console.log("Creating task for project:", projectId);
   const res = await api.post(`/tasks/create/${projectId}`, data);
 
   return res.data;

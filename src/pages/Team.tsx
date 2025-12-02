@@ -30,7 +30,7 @@ export default function Team() {
       // ✅ Adjust based on your API structure
       setUsers(res.users || []);
 
-      console.log("Users:", res.users);
+      // console.log("Users:", res.users);
     } catch (err: any) {
       setError(err.response?.data?.message || "Failed to fetch users");
     } finally {
