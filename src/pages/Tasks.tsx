@@ -1,8 +1,27 @@
 import { useEffect, useState } from "react";
 import { getAllTasks } from "../api/tasks";
+type TaskType = {
+  id: string;
+  title: string;
+  description: string;
+  priority: "LOW" | "MEDIUM" | "HIGH";
+  status: "PENDING" | "COMPLETED";
+  createdAt: string;
+  updatedAt: string;
+  project: {
+    id: string;
+    title: string;
+    description: string;
+  };
+  creator: {
+    id: string;
+    name: string;
+    email: string;
+  };
+};
 
 export const Tasks = () => {
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState<TaskType[]>([]);
 
   const fetchTasks = async () => {
     try {
