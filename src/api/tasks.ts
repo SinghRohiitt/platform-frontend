@@ -28,3 +28,8 @@ export const deleteTaskById = async (taskId: string) => {
 export const assignTaskToUser = async (taskId: string, userId: string | null) => {
   return (await api.put(`/tasks/assign/${taskId}`, { assignedTo: userId || null })).data;
 };
+
+export const getAllTasks = async () => {
+  const res = await api.get(`/tasks/`);
+  return res.data;
+}

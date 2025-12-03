@@ -15,6 +15,7 @@ import ProjectTasks from "./pages/ProjectTasks";
 import AdminLayout from "./layouts/AdminLayout";
 import UserProject from "./pages/UserProject";
 import EditProfile from "./pages/EditProfile";
+import { Tasks } from "./pages/Tasks";
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
             <Route path="/edit-profile" element={<EditProfile />} />
             <Route path="/projects" element={<Project />} />
             <Route path="/team" element={<Team />} />
+            <Route path="/tasks" element={<Tasks />} />
           </Route>
         </Route>
         <Route element={<PublicLayout />}>

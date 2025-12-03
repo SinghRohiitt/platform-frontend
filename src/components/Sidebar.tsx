@@ -6,7 +6,7 @@ import {
   Plus,
 
   LucideProjector,
-  ClipboardList,
+  // ClipboardList,
 } from "lucide-react";
 import type { RootState } from "../redux/store";
 import { useSelector } from "react-redux";
@@ -15,19 +15,20 @@ import logo from "../assets/logo.png";
 const links = [
   { name: "Dashboard", icon: Home, path: "/", role: "all" },
   { name: "Projects", icon: LucideProjector, path: "/projects", role: "ADMIN" },
-  {
-    name: "Tasks",
-    icon: ClipboardList,
-    path: "/project/:projectId/tasks",
-    role: "all",
-  },
-  {
-    name: "project",
-    icon: LucideProjector,
-    path: "/user/project",
-    role: "all",
-  },
-  { name: "Team", icon: Users, path: "/team", role: "ADMIN" },
+  // {
+  //   name: "Tasks",
+  //   icon: ClipboardList,
+  //   path: "/project/:projectId/tasks",
+  //   role: "all",
+  // },
+  // {
+  //   name: "project",
+  //   icon: LucideProjector,
+  //   path: "/user/project",
+  //   role: "all",
+  // },
+  { name: "User", icon: Users, path: "/team", role: "ADMIN" },
+    { name: "Tasks", icon: LucideProjector, path: "/tasks", role: "ADMIN" },
   { name: "Settings", icon: Settings, path: "/settings", role: "ADMIN" },
 ];
 

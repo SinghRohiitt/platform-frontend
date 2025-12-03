@@ -168,7 +168,7 @@ export default function Project() {
         </div>
 
         <Modal open={open} onClose={() => setOpen(false)}>
-          <div className="fixed inset-0 bg-white/30 backdrop-blur-md flex justify-center items-center p-4 z-50">
+          <div className="fixed inset-0 bg-white/30 backdrop-blur-md` flex justify-center items-center p-4 z-50">
             <div className="bg-white/95 backdrop-blur-xl p-8 rounded-3xl w-full max-w-md shadow-2xl border border-white/50 relative overflow-hidden">
               {/* Decorative gradient circles */}
               <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-indigo-400/20 to-blue-400/20 rounded-full blur-3xl -z-10"></div>
