@@ -151,7 +151,7 @@ export default function ProjectTasks() {
                             }}
                           >
                             <option value="">Unassigned</option>
-                            {members.map((m) => (
+                            {members?.map((m) => (
                               <option key={m.id} value={m.id}>
                                 {m.name} ({m.role})
                               </option>
