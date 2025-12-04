@@ -5,7 +5,7 @@ import { Link } from "react-router-dom"; // 👈 ADD THIS
 
 export const Header = () => {
   const { user } = useSelector((state: RootState) => state.auth);
-  console.log("Header - user:", user);
+  // console.log("Header - user:", user);
 
   return (
     <header className="h-20 flex items-center justify-between px-6 bg-white/80 backdrop-blur-md border-gray-200 sticky top-0 z-20">

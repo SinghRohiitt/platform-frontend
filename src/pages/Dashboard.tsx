@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import banner from "../assets/banner.png";
-import { TrendingUp, CheckCircle, Star, Eye } from "lucide-react";
+import { TrendingUp, CheckCircle, Star, User2 } from "lucide-react";
 import { gettaskLength } from "../api/tasks"; // your API function
 import { getUserLength } from "../api/auth";
 import { getProjectLength } from "../api/projects";
@@ -23,7 +23,7 @@ export default function Dashboard() {
           completed: data.completed,
           pending: data.pending,
         });
-        console.log("Dashboard stats:", data);
+        // console.log("Dashboard stats:", data);
       } catch (error) {
         console.error("Failed to fetch stats", error);
       }
@@ -51,7 +51,7 @@ export default function Dashboard() {
       try {
         const data = await getProjectLength();
         setProject(data.totalProjects);
-        console.log("Dashboard stats:", data);
+        // console.log("Dashboard stats:", data);
       } catch (error) {
         console.error("Failed to fetch stats", error);
       }
@@ -65,23 +65,23 @@ export default function Dashboard() {
       id: 1,
       title: "Total Users",
       value: user,
-      icon: TrendingUp,
+      icon: User2,
       bgColor: "bg-gradient-to-br from-yellow-400 to-orange-400",
       iconBg: "bg-yellow-300/30",
     },
     {
       id: 2,
-      title: "Completed",
+      title: "Total Projects",
       value: project,
-      icon: CheckCircle,
+      icon: Star,
       bgColor: "bg-gradient-to-br from-purple-600 to-indigo-600",
       iconBg: "bg-purple-500/30",
     },
     {
       id: 3,
-      title: "Pending",
+      title: "Pending Tasks",
       value: stats.pending,
-      icon: Star,
+      icon: TrendingUp,
       bgColor: "bg-gradient-to-br from-pink-500 to-rose-500",
       iconBg: "bg-pink-400/30",
     },
@@ -92,7 +92,7 @@ export default function Dashboard() {
         stats.total === 0
           ? "0%"
           : Math.round((stats.completed / stats.total) * 100) + "%",
-      icon: Eye,
+      icon: CheckCircle,
       bgColor: "bg-gradient-to-br from-purple-300 to-indigo-300",
       iconBg: "bg-purple-200/40",
     },
