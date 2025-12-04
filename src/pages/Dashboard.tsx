@@ -59,6 +59,7 @@ export default function Dashboard() {
 
     fetchProject();
   }, []);
+
   const cards = [
     {
       id: 1,
@@ -71,7 +72,7 @@ export default function Dashboard() {
     {
       id: 2,
       title: "Completed",
-      value: stats.completed,
+      value: project,
       icon: CheckCircle,
       bgColor: "bg-gradient-to-br from-purple-600 to-indigo-600",
       iconBg: "bg-purple-500/30",

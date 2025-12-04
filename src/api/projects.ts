@@ -38,6 +38,6 @@ export const getMyProject = async () => {
 };
 
 export const getProjectLength = async () => {
-  const res = await api.get("/projects/projectlength");
+  const res = await api.get("/projects/count");
   return res.data;
 };
