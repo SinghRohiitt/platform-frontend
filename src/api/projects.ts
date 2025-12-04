@@ -36,3 +36,8 @@ export const getMyProject = async () => {
   // console.log("API - getMyProject response:", res);
   return res.data;
 };
+
+export const getProjectLength = async () => {
+  const res = await api.get("/projects/projectlength");
+  return res.data;
+};

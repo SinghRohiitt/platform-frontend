@@ -33,3 +33,9 @@ export const getAllTasks = async () => {
   const res = await api.get(`/tasks/`);
   return res.data;
 }
+
+
+export const gettaskLength = async () => {
+  const res = await api.get(`/tasks/taskstatus`);
+  return res.data;
+}

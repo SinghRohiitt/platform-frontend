@@ -36,3 +36,8 @@ export const updateProfile = async (data: {
   const res = await api.put("/auth/update-profile", data);
   return res.data;
 };
+
+export const getUserLength = async () => {
+  const res = await api.get("/auth/userlength");
+  return res.data;
+};
