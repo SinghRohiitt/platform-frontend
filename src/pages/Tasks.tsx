@@ -22,20 +22,37 @@ type TaskType = {
 
 export const Tasks = () => {
   const [tasks, setTasks] = useState<TaskType[]>([]);
+  const [loading, setLoading] = useState(true);
 
   const fetchTasks = async () => {
     try {
+      setLoading(true);
       const res = await getAllTasks();
       console.log("Fetched tasks:", res);
-      setTasks(res.tasks); // 👈 mapping tasks array
+      setTasks(res.tasks);
     } catch (error) {
       console.error("Error fetching tasks:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
   useEffect(() => {
     fetchTasks();
   }, []);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-purple-50 to-indigo-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600 mb-4"></div>
+          <p className="text-gray-600 text-lg font-medium">
+            Loading tasks...
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="p-6">

@@ -10,7 +10,7 @@ export const Header = () => {
   return (
     <header className="h-20 flex items-center justify-between px-6 bg-white/80 backdrop-blur-md border-gray-200 sticky top-0 z-20">
       <h1 className="text-lg font-semibold text-gray-800 tracking-tight">
-        Dashboard
+        {/* Dashboard */}
       </h1>
 
       <div className="flex items-center gap-4">
